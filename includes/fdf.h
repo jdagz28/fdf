@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/21 15:58:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/22 11:14:23 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "get_next_line_bonus.h"
 # include "mlx.h"
 
 # ifdef LINUX
@@ -105,12 +104,41 @@ typedef struct s_fdf
 	t_data_mlx		*mlx_data;
 	void			*mlx;
 	void			*win;
-	// char			*display_title;
+	char			*display_title;
 	t_map_data		map;
-	// t_projection	projection;
+	t_projection	projection;
 }	t_fdf;
 
+//ARG_HANDLER.C
+int	arg_handler(int argc, char **argv);
+
+//INIT.C
+int	init_fdf(t_fdf *fdf, char *filename);
+int	init_image(t_fdf *fdf);
+
+//MAP_COLOR.C
+void	color_points(t_map_data *map);
+
+//MAP PARSER.C
 void	map_parser(t_map_data *map, char *filename);
 
+//MAP PARSER_UTILS.C
+int	valid_point(char *value);
+int	check_hexcolor(char *line);
+void	error_split_loadpoint(t_map_data *map);
+void	get_mapsize(t_map_data *map);
+
+//INIT_MAP.C
+void	initialize_colors(t_map_data *map);
+void	init_map(t_map_data *map);
+
+//UTILS.C
+int	destroy_fdf(t_fdf *fdf);
+void	exit_error(char	*str);
+void	free_split(char **split, size_t len);
+void	free_map(t_map_data *map);
+
+//DEBUG.C
+void	print_map(t_map_data *map);
 
 #endif
