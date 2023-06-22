@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/21 12:21:42 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/21 21:35:39 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ INCLUDE_DIRECTORY       := ./includes/
 
 
 LIBRARIES               := -lmlx -lm -L. -L$(LIBFT_DIRECTORY) -lft -L$(PRINTF_DIRECTORY) -lftprintf \
-							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS) #-L$(MLX_DIRECTORY)
+							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS) -L$(MLX_DIRECTORY)
 INCLUDES                := -I$(LIBFT_HEADER) -I$(PRINTF_HEADER) -I$(GNL_HEADER) \
 							-I$(INCLUDE_DIRECTORY) -I$(MLX_HEADER) $(LINUX_INCLUDES)
 BONUS_INCLUDES          :=
