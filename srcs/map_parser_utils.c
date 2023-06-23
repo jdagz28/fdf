@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:13:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 10:16:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:21:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 int	valid_point(char *value)
 {
@@ -57,13 +58,13 @@ void	error_split_loadpoint(t_map_data *map)
 
 static void	get_mapsize_cont(t_map_data *map, int elem_count)
 {
-	if (elem_count && (map->limits.axis[X_AXIS] != elem_count))
+	if (elem_count > 0 && (map->limits.axis[X_AXIS] != elem_count))
 	{
 		ft_printf("Row size is different from the previous! (row %d)\n", \
 					map->limits.axis[X_AXIS]);
 		exit_error("Map row elements are different.\n");
 	}
-	map->limits.axis[Y_AXIS]++;
+	map->limits.axis[Y_AXIS] = map->limits.axis[Y_AXIS] + 1;
 	map->map_height = map->limits.axis[Y_AXIS];
 	map->map_width = map->limits.axis[X_AXIS];
 	map->dimension = map->map_height * map->map_width;
@@ -71,12 +72,12 @@ static void	get_mapsize_cont(t_map_data *map, int elem_count)
 
 void	get_mapsize(t_map_data *map)
 {
-	int i;
-	int elem_count;
+	int	i;
+	int	elem_count;
 
-	i = 0;
+	i = -1;
 	elem_count = 0;
-	while (map->mapread[i])
+	while (map->mapread[++i])
 	{
 		if (map->mapread[i] == '\n' && map->mapread[i + 1] == '\0')
 			break ;
@@ -85,7 +86,7 @@ void	get_mapsize(t_map_data *map)
 				elem_count++;
 		if (map->mapread[i] == '\n')
 		{
-			map->limits.axis[Y_AXIS]++;
+			map->limits.axis[Y_AXIS] = map->limits.axis[Y_AXIS] + 1;
 			if (map->limits.axis[X_AXIS] != 0 && \
 					(map->limits.axis[X_AXIS] != elem_count))
 				exit_error("Map row elements are different.\n");
@@ -93,7 +94,6 @@ void	get_mapsize(t_map_data *map)
 				map->limits.axis[X_AXIS] = elem_count;
 			elem_count = 0;
 		}
-		i++;
 	}
 	get_mapsize_cont(map, elem_count);
 }

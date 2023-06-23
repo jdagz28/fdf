@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 12:30:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:51:26 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	map_parser(&fdf.map, argv[1]);
 	if (!init_fdf(&fdf, argv[1]))
 		destroy_fdf(&fdf);
+	// print_map(&fdf.map);
 	draw_map(&fdf);
 	mlx_loop(&fdf.mlx);
 

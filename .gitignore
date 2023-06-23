@@ -1,0 +1,5 @@
+#Ignore Objects
+**/objects 
+*.o
+./fdf
+.editorconfig

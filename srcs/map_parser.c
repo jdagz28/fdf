@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 11:00:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:27:35 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	load_points(char *line, t_map_data *map, int noline)
 	{
 		if (!valid_point(&split_res[i][0]))
 			exit_error("Incorrect map file format. \n");
-		map->points[index].axis[Z_AXIS] = ft_atoi(split_res[i]);
+		map->points[index].axis[Z_AXIS] = ft_atoi(&split_res[i][0]);
 		map->points[index].axis[X_AXIS] = i - map->limits.axis[X_AXIS] / 2;
 		map->points[index].axis[Y_AXIS] = noline - map->limits.axis[Y_AXIS] / 2;
 		assign_pointcolor(&map->points[index], split_res[i]);
@@ -60,7 +60,7 @@ static void	get_mappoints(t_map_data *map)
 	prev_line = map->mapread;
 	line = NULL;
 	map->points = ft_calloc(map->dimension, sizeof(t_point));
-	while (1)
+	while (i++)
 	{
 		if (map->mapread[i] == '\n' || map->mapread[i] == '\0')
 		{
@@ -115,6 +115,4 @@ void	map_parser(t_map_data *map, char *filename)
 	ft_printf("MAP SIZE: %d x %d\n", map->map_width, map->map_height);
 	get_mappoints(map);
 	color_points(map);
-	print_map(map);
-	free_map(map);
 }

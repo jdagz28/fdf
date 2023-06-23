@@ -6,13 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 10:57:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:09:53 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <math.h>
-
+#include <stdio.h>
 
 int	pixel_in_window(t_point pixel)
 {
@@ -60,6 +59,7 @@ void	connect_points(t_point *point, t_fdf *fdf, int density, int line)
 	int	y_end;
 
 	i = 0;
+	printf("Connecting the two points\n");
 	while (i < (int)fdf->map.limits.axis[X_AXIS])
 	{
 		x_end = i + density;
@@ -80,14 +80,18 @@ void	draw_wireframe(t_fdf *fdf, t_point *point)
 	int	density;
 
 	density = 8 / fdf->map.scale;
+	printf("Map Scale: %f\n", fdf->map.scale);
+	printf("Density: %d\n", density);
 	if (density == 0)
 		density = 1;
 	i = 0;
+	printf("Drawing Wireframe\n");
+	printf("Dimensio: %d\n", fdf->map.dimension);
 	while (i < fdf->map.dimension)
 	{
 		connect_points(&point[i], fdf, density, i \
 							/ fdf->map.limits.axis[X_AXIS]);
+		printf("%d\n", i);
 		i = i + fdf->map.limits.axis[X_AXIS] * density;
-
 	}
 }
