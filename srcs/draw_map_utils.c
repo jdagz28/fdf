@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 10:03:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 12:35:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	apply_depth(t_point *proyect, float divisor, int len)
 	i = 0;
 	while (i < len)
 	{
-		proyect[i].axis[Z] = proyect[i].axis[Z] / divisor;
+		proyect[i].axis[Z_AXIS] = proyect[i].axis[Z_AXIS] / divisor;
 		i++;
 	}
 }

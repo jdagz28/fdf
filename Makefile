@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/22 11:09:07 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/23 10:51:25 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,10 +77,18 @@ HEADER_FILES_BONUS		:= $(addprefix $(INCLUDE_DIRECTORY), $(HEADEHEADER_BONUSR))
 SRCS_LIST               := main.c\
 							arg_handler.c\
 							init.c\
+							init_map.c\
+							draw_dot.c\
+							draw_line.c\
+							draw_map.c\
+							draw_map_utils.c\
+							draw.c\
 							map_color.c\
 							map_parser.c\
 							map_parser_utils.c\
-							init_map.c\
+							matrix.c\
+							rotation_matrices.c\
+							transformation_matrices.c\
 							utils.c\
 							debug.c
 

@@ -6,11 +6,29 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 21:46:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 12:28:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	init_matrix(float (*matrix)[3])
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			matrix[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
 
 t_point	matrix_multiplier(float matrix[3][3], t_point point)
 {

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 23:22:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 12:29:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,32 @@ typedef struct s_fdf
 //ARG_HANDLER.C
 int	arg_handler(int argc, char **argv);
 
+//DRAW_LINE.C
+int	pixel_in_window(t_point pixel);
+void	draw_line_dda(t_fdf *fdf, t_point start, t_point end);
+void	connect_points(t_point *point, t_fdf *fdf, int density, int line);
+void	draw_wireframe(t_fdf *fdf, t_point *point);
+
+//DRAW_MAP_UTILS.C
+void	apply_depth(t_point *proyect, float divisor, int len);
+void	set_color(char *buffer, int endian, int color, int alpha);
+void	duplicate_map(t_point *src, t_point *dst, int len);
+
+//DRAW_MAP.C
+int	draw_map(t_fdf *fdf);
+
+//DRAW.C
+void	my_mlx_pixel_put(t_fdf *fdf, t_point pixel);
+
 //INIT.C
 int	init_fdf(t_fdf *fdf, char *filename);
 int	init_image(t_fdf *fdf);
 
+//INIT_MAP.C
+void	init_map(t_map_data *map);
+
 //MAP_COLOR.C
+int	gradient(int startcolor, int endcolor, int len, int pix);
 void	color_points(t_map_data *map);
 
 //MAP PARSER.C
@@ -129,11 +150,10 @@ void	error_split_loadpoint(t_map_data *map);
 void	get_mapsize(t_map_data *map);
 
 //MATRIX.C
+void	init_matrix(float (*matrix)[3]);
 t_point	matrix_multiplier(float matrix[3][3], t_point point);
 
-//INIT_MAP.C
-void	initialize_colors(t_map_data *map);
-void	init_map(t_map_data *map);
+
 
 //UTILS.C
 int	destroy_fdf(t_fdf *fdf);
@@ -148,7 +168,7 @@ void	rotate_z(t_point *points, t_point *projection, float ang, int len);
 
 //TRANSFORMATION_MATRICES.C
 void	scale(t_point *points, int scale, int len);
-void	translate(t_point *point, int move, int len);
+void	translate(t_point *points, t_point move, int len);
 
 
 //DEBUG.C

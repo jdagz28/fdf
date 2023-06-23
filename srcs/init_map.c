@@ -6,13 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:47:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 09:59:26 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 10:48:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	initialize_colors(t_map_data *map)
+static void	initialize_colors(t_map_data *map)
 {
 	map->color.background = 0x151515; //BLACK
 	map->color.highest_color = 0x8b292a; //RED

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 01:06:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 12:36:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	apply_3d_to_points(t_fdf *fdf, t_point *points)
 	rotate_z(points, points, fdf->map.ang[Z_AXIS], fdf->map.dimension);
 	//!ortho projection
 	scale(points, fdf->map.scale, fdf->map.dimension);
-	translate(points, fdf->map.source, fdf->map.len);
+	translate(points, fdf->map.source, fdf->map.dimension);
 }
 
 static int	get_color_value(t_fdf *fdf, int color)
@@ -31,23 +31,24 @@ static int	get_color_value(t_fdf *fdf, int color)
 	return (color);
 }
 
-static void	draw_bakground(t_fdf *fdf. int background)
+static void	draw_background(t_fdf *fdf, int background)
 {
 	int	axis[2];
 	int	pixel;
 	int	color;
 
-	bakground = get_color_value(fdf, bakground);
+	background = get_color_value(fdf, background);
 	axis[X_AXIS] = 0;
 	axis[Y_AXIS] = 0;
-	while (axis[Y_AXIS] < WINDOW_WIDTH)
+	color = background;
+	while (axis[Y_AXIS] < WINDOW_HEIGHT)
 	{
-		while (axis[X_AXIS] < WINDOW_HEIGHT)
+		while (axis[X_AXIS] < WINDOW_WIDTH)
 		{
 			pixel = (axis[Y_AXIS] * fdf->mlx_data->line_length) \
 					+ (axis[X_AXIS] * 4);
 			set_color(&fdf->mlx_data->addr[pixel], \
-					fdf->mlx_data.endian, color, 1);
+					fdf->mlx_data->endian, color, 1);
 			axis[X_AXIS]++;
 		}
 		axis[Y_AXIS]++;
@@ -55,12 +56,12 @@ static void	draw_bakground(t_fdf *fdf. int background)
 	}
 }
 
-void	draw(t_fdf *fdf, t_point *projection)
+static void	draw(t_fdf *fdf, t_point *projection)
 {
-	if (fdf->map->drawtype == line)
+	if (fdf->map.drawtype == line)
 		draw_wireframe(fdf, projection);
-	else
-		draw_points(fdf, projection);
+	// else
+	// 	draw_points(fdf, projection);
 }
 
 int	draw_map(t_fdf *fdf)
@@ -69,10 +70,13 @@ int	draw_map(t_fdf *fdf)
 
 	projection = malloc(sizeof(t_point) * fdf->map.dimension);
 	if (!projection)
-		return (NULL);
+		return (0);
 	fdf->map.renders++;
 	draw_background(fdf, fdf->map.color.background);
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
 	apply_3d_to_points(fdf, projection);
 	draw(fdf, projection);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
+	free(projection);
+	return (1);
 }

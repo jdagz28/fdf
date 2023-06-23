@@ -6,13 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 10:52:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 10:54:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	gradient(int startcolor, int endcolor, int len, int pix)
+int	gradient(int startcolor, int endcolor, int len, int pix)
 {
 	double	increment[3];
 	int		new[3];

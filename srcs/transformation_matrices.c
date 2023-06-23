@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 23:20:51 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 12:29:52 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	scale(t_point *points, int scale, int len)
 	}
 }
 
-void	translate(t_point *point, int move, int len)
+void	translate(t_point *points, t_point move, int len)
 {
 	int i;
 
@@ -35,6 +35,6 @@ void	translate(t_point *point, int move, int len)
 	{
 		points[i].axis[X_AXIS] = points[i].axis[X_AXIS] + move.axis[X_AXIS];
 		points[i].axis[Y_AXIS] = points[i].axis[Y_AXIS] + move.axis[Y_AXIS];
-		points[i].axis[Z_AXIS] = points[i].axis[Z_AXI]
+		points[i].axis[Z_AXIS] = points[i].axis[Z_AXIS];
 	}
 }
