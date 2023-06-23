@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 11:14:23 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/22 23:22:45 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ int	check_hexcolor(char *line);
 void	error_split_loadpoint(t_map_data *map);
 void	get_mapsize(t_map_data *map);
 
+//MATRIX.C
+t_point	matrix_multiplier(float matrix[3][3], t_point point);
+
 //INIT_MAP.C
 void	initialize_colors(t_map_data *map);
 void	init_map(t_map_data *map);
@@ -137,6 +140,16 @@ int	destroy_fdf(t_fdf *fdf);
 void	exit_error(char	*str);
 void	free_split(char **split, size_t len);
 void	free_map(t_map_data *map);
+
+//ROTATION_MATRICES.C
+void	rotate_x(t_point *points, t_point *projection, float ang, int len);
+void	rotate_y(t_point *points, t_point *projection, float ang, int len);
+void	rotate_z(t_point *points, t_point *projection, float ang, int len);
+
+//TRANSFORMATION_MATRICES.C
+void	scale(t_point *points, int scale, int len);
+void	translate(t_point *point, int move, int len);
+
 
 //DEBUG.C
 void	print_map(t_map_data *map);

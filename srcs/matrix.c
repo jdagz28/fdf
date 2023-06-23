@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 10:51:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 23:47:46 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/06/22 21:46:45 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
+t_point	matrix_multiplier(float matrix[3][3], t_point point)
 {
-	char	*dst;
+	int		i;
+	int		k;
+	t_point	res;
 
-	if (x < 0 || x >= fdf->map->map_width || y < 0
-		|| y >= fdf->map->map_height)
+	res = point;
+	i = 0;
+	while (i < 3)
 	{
-		return ;
+		res.axis[i] = 0;
+		res.color = point.color;
+		k = 0;
+		while (k < 3)
+		{
+			res.axis[i] += matrix[i][k] * point.axis[k];
+			k++;
+		}
+		i++;
 	}
-	dst = fdf->mlx_data->addr + (y * fdf->mlx_data->line_length
-			+ x * (fdf->mlx_data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	return (res);
 }

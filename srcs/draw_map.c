@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 13:53:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/23 01:06:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	get_color_value(t_fdf *fdf, int color)
 		color = mlx_get_color_value(fdf->mlx, color);
 	return (color);
 }
-
 
 static void	draw_bakground(t_fdf *fdf. int background)
 {
@@ -56,16 +55,24 @@ static void	draw_bakground(t_fdf *fdf. int background)
 	}
 }
 
+void	draw(t_fdf *fdf, t_point *projection)
+{
+	if (fdf->map->drawtype == line)
+		draw_wireframe(fdf, projection);
+	else
+		draw_points(fdf, projection);
+}
 
 int	draw_map(t_fdf *fdf)
 {
-	t_point	*map_points;
+	t_point	*projection;
 
 	projection = malloc(sizeof(t_point) * fdf->map.dimension);
 	if (!projection)
 		return (NULL);
 	fdf->map.renders++;
 	draw_background(fdf, fdf->map.color.background);
-	duplicate_map(fdf->map.points, map_points, fdf->map.dimension);
-	apply_3d_to_points(fdf, map_points);
+	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
+	apply_3d_to_points(fdf, projection);
+	draw(fdf, projection);
 }
