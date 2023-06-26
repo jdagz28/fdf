@@ -6,29 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/25 01:28:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 15:41:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-
-
-void	project_ortho(t_point *points, t_point *projection, int len)
-{
-	int		i;
-	float	projection_matrix[3][3];
-
-	init_matrix(projection_matrix);
-	projection_matrix[0][0] = 1;
-	projection_matrix[1][1] = 1;
-	i = 0;
-	while (i < len)
-	{
-		projection[i] = matrix_multiplier(projection_matrix, points[i]);
-		i++;
-	}
-}
 
 static void	apply_3d_to_points(t_fdf *fdf, t_point *points)
 {
@@ -41,11 +23,20 @@ static void	apply_3d_to_points(t_fdf *fdf, t_point *points)
 	translate(points, fdf->map.source, fdf->map.dimension);
 }
 
-static int	get_color_value(t_fdf *fdf, int color)
+static void	fit_window(t_fdf *fdf, t_point *projection)
 {
-	if (fdf->mlx_data->bits_per_pixel != 32)
-		color = mlx_get_color_value(fdf->mlx, color);
-	return (color);
+	fdf->map.source.axis[X_AXIS] = WINDOW_WIDTH / 2;
+	fdf->map.source.axis[Y_AXIS] = WINDOW_HEIGHT / 2;
+	fdf->map.source.axis[Z_AXIS] = 0;
+	fdf->map.scale = 1;
+	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
+	apply_3d_to_points(fdf, projection);
+	while (!(limits(projection, fdf->map.dimension)))
+	{
+		duplicate_map(fdf->map.points, projection, fdf->map.dimension);
+		apply_3d_to_points(fdf, projection);
+		fdf->map.scale = fdf->map.scale + 0.2;
+	}
 }
 
 static void	draw_background(t_fdf *fdf, int background)
@@ -73,12 +64,14 @@ static void	draw_background(t_fdf *fdf, int background)
 	}
 }
 
-void	draw_type(t_fdf *fdf, t_point *projection)
+static void	draw_type(t_fdf *fdf, t_point *projection)
 {
-	printf("print line\n");
+	if (fdf->fit == 1)
+	{
+		fit_window(fdf, projection);
+	}
 	if (fdf->map.drawtype == line)
 	{	
-		printf("draw type identified as line\n");
 		draw_wireframe(fdf, projection);
 	}
 }
@@ -92,14 +85,10 @@ int	draw_map(t_fdf *fdf)
 		exit(1);
 	fdf->map.renders = fdf->map.renders + 1;
 	draw_background(fdf, fdf->map.color.background);
-	printf("Background drawn\n");
-	print_map(&fdf->map);
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
-	printf("Map duplicated\n");
 	apply_3d_to_points(fdf, projection);
-	printf("Elemental Rotation applied to points\n");
 	draw_type(fdf, projection);
-	//mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
 	free(projection);
 	return (1);
 }

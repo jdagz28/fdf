@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:47:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 14:14:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:18:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	init_image(t_fdf *fdf)
 		free_map(&fdf->map);
 		return (0);
 	}
+	fdf->fit = 1;
+	fdf->map.renders = 0;
+	fdf->map.proportion = fdf->map.limits.axis[Z_AXIS] \
+			/ fdf->map.limits.axis[X_AXIS];
+	if (fdf->map.proportion > 0.5)
+		fdf->map.z_divisor = fdf->map.proportion * 30;
 	return (1);
 }
 

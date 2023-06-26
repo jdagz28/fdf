@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:47:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 10:48:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 15:03:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	initialize_colors(t_map_data *map)
 {
-	map->color.background = 0x151515; //BLACK
-	map->color.highest_color = 0x8b292a; //RED
-	map->color.lowest_color = 0x000bff; //BLUE
-	map->color.ground_color = 0x165214; //GREEN
+	map->color.background = 0x151515;
+	map->color.highest_color = 0x8b292a;
+	map->color.lowest_color = 0x000bff;
+	map->color.ground_color = 0x165214;
 }
 
 void	init_map(t_map_data *map)

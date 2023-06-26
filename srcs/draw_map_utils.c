@@ -6,15 +6,35 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 13:20:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:30:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-* Applies depth to map points by z_division
-*/
+int	limits(t_point *points, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (points[i].axis[X_AXIS] > (WINDOW_WIDTH - 150))
+			return (1);
+		if (points[i].axis[Y_AXIS] > WINDOW_HEIGHT - 200)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	get_color_value(t_fdf *fdf, int color)
+{
+	if (fdf->mlx_data->bits_per_pixel != 32)
+		color = mlx_get_color_value(fdf->mlx, color);
+	return (color);
+}
+
 void	apply_depth(t_point *proyect, float divisor, int len)
 {
 	int	i;
@@ -26,13 +46,6 @@ void	apply_depth(t_point *proyect, float divisor, int len)
 		i++;
 	}
 }
-
-/*
-*	This function fills 4 bytes of the given address whith the values of colors
-*	depending the andian
-*      endian = 1 --> Most significant (Alpha) byte first
-*      endian = 0 --> Least significant (Blue) byte first
-*/
 
 void	set_color(char *buffer, int endian, int color, int alpha)
 {

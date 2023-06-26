@@ -6,12 +6,19 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:13:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/25 01:42:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:44:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+
+void	check_z(t_map_data *map, int index)
+{
+	if (map->limits.axis[Z_AXIS] < map->points[index].axis[Z_AXIS])
+		map->limits.axis[Z_AXIS] = map->points[index].axis[Z_AXIS];
+	if (map->z_min > map->points[index].axis[Z_AXIS])
+		map->z_min = map->points[index].axis[Z_AXIS];
+}
 
 int	valid_point(char *value)
 {
@@ -41,20 +48,12 @@ int	check_hexcolor(char *line)
 	{
 		color = ft_split(line, ',');
 		get_color = strtol(color[1] + 2, NULL, 16);
-		free_split(color, 2);
+		free_split(color);
 		return (get_color);
 	}
 	else
 		return (0);
 }
-
-void	error_split_loadpoint(t_map_data *map)
-{
-	free_map(map);
-	(void)map;
-	exit_error("Parsing error while loading each point.\n");
-}
-
 
 static void	get_mapsize_cont(t_map_data *map, int elem_count)
 {

@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_handler.c                                      :+:      :+:    :+:   */
+/*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:47:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:03:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:56:10 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	file_extension_checker(const char *filename, const char *extension)
+void	project_isometric(t_map_data *map)
 {
-	if (ft_strlen(filename) < ft_strlen(extension))
-		return (1);
-	if (ft_strncmp(filename + (ft_strlen(filename) - ft_strlen(extension)), \
-			extension, ft_strlen(extension)))
-		return (1);
-	return (0);
+	map->ang[X_AXIS] = 30;
+	map->ang[Y_AXIS] = 330;
+	map->ang[Z_AXIS] = 30;
+	map->source.axis[X_AXIS] = WINDOW_WIDTH / 2;
+	map->source.axis[Y_AXIS] = WINDOW_HEIGHT / 2;
 }
 
-int	arg_handler(int argc, char **argv)
+void	project_ortho(t_point *points, t_point *projection, int len)
 {
-	if (argc != 2)
+	int		i;
+	float	projection_matrix[3][3];
+
+	init_matrix(projection_matrix);
+	projection_matrix[0][0] = 1;
+	projection_matrix[1][1] = 1;
+	i = 0;
+	while (i < len)
 	{
-		ft_printf("Usage: ./fdf {file in .fdf format} \n");
-		return (1);
+		projection[i] = matrix_multiplier(projection_matrix, points[i]);
+		i++;
 	}
-	if (file_extension_checker(argv[1], ".fdf") != 0)
-	{
-		ft_printf("Error: Invalid map format. Must be in `.fdf` format\n");
-		return (1);
-	}
-	ft_printf("File: %s\n", argv[1]);
-	return (0);
 }

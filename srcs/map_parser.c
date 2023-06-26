@@ -6,12 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/25 01:37:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 15:23:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static void	assign_pointcolor(t_point *map_point, char *point_str)
 {
@@ -20,49 +19,44 @@ static void	assign_pointcolor(t_point *map_point, char *point_str)
 		map_point->hex_color = check_hexcolor(point_str);
 }
 
-static void	load_points(char *line, t_map_data *map, int noline)
+static int	load_points(char *line, t_map_data *map, int noline)
 {
-	char	**split_res;
-	int		i;
-	int		index;
+	char			**split_res;
+	int				i;
+	static int		index = 0;
 
 	i = 0;
-	index = 0;
 	split_res = ft_split(line, ' ');
 	if (!split_res)
 		error_split_loadpoint(map);
 	while (split_res[i] && split_res[i][0] != '\n')
 	{
 		if (!valid_point(&split_res[i][0]))
-			exit_error("Incorrect map file format. \n");
+			exit_error("Invalid point. Incorrect format.\n");
 		map->points[index].axis[Z_AXIS] = ft_atoi(&split_res[i][0]);
 		map->points[index].axis[X_AXIS] = i - map->limits.axis[X_AXIS] / 2;
 		map->points[index].axis[Y_AXIS] = noline - map->limits.axis[Y_AXIS] / 2;
 		map->points[index].ispoint = 1;
 		assign_pointcolor(&map->points[index], split_res[i]);
-		if (map->limits.axis[Z_AXIS] < map->points[index].axis[Z_AXIS])
-			map->limits.axis[Z_AXIS] = map->points[index].axis[Z_AXIS];
-		if (map->z_min > map->points[index].axis[Z_AXIS])
-			map->z_min = map->points[index].axis[Z_AXIS];
+		check_z(map, index);
 		i++;
 		index++;
-		// print_point(&map->points[index]);
 	}
-	free_split(split_res, index);
+	free_split(split_res);
+	return (i);
 }
 
 static void	get_mappoints(t_map_data *map)
 {
-	int		i;
-	char	*line;
-	char	*prev_line;
-	int		total_lines;
+	int				i;
+	char			*line;
+	char			*prev_line;
+	static int		total_lines = 0;
+	static int		points = 0;
 
 	i = 0;
-	total_lines = 0;
 	prev_line = map->mapread;
 	line = NULL;
-	printf("Map Dimension: %d", map->dimension);
 	map->points = ft_calloc(map->dimension, sizeof(t_point));
 	while (++i)
 	{
@@ -71,13 +65,13 @@ static void	get_mappoints(t_map_data *map)
 			free(line);
 			line = ft_substr(prev_line, 0, &map->mapread[i] - prev_line);
 			prev_line = &map->mapread[i + 1];
-			load_points(line, map, total_lines++);
+			points += load_points(line, map, total_lines++);
+			ft_printf("\r Loading pts: %d out of %d.", points, map->dimension);
 			if (map->mapread[i] == '\0')
 				break ;
 		}
 	}
-	// print_map(map);
-	ft_printf("Successfully loaded %d points.\n", map->dimension);
+	ft_printf("\nSuccessfully loaded %d points.\n", points);
 	free(line);
 }
 
@@ -118,8 +112,10 @@ void	map_parser(t_map_data *map, char *filename)
 	map->mapread = read_map(fd);
 	close(fd);
 	get_mapsize(map);
+	if (map->map_height == 0 || map->map_width == 0)
+		exit_error("Map width and height should be greater than zero.");
 	ft_printf("====================================\n");
-	ft_printf("MAP SIZE: %d x %d\n", map->map_width, map->map_height);
+	ft_printf("Map Size: %d x %d\n", map->map_width, map->map_height);
 	get_mappoints(map);
 	color_points(map);
 }
