@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 11:55:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/21 13:50:02 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:00:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 500000
+#  define BUFFER_SIZE 50000000
 # endif
 
 # include <unistd.h>

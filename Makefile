@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/24 23:04:43 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/26 13:52:21 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OS_NAME					:= $(shell uname -s)
 ifeq ($(OS_NAME), Linux)
 	FSANITIZE			:= -fsanitize=address -fsanitize=leak
 	FRAMEWORK			:=
-	LINUX_LIBS			:= -lXext -lX11 
+	LINUX_LIBS			:= -lXext -lX11  -L$(MLX_DIRECTORY)
 	LINUX_INCLUDES		:= -I/usr/include
 	OS_FLAG				:= -D LINUX
 else
@@ -64,7 +64,7 @@ INCLUDE_DIRECTORY       := ./includes/
 
 
 LIBRARIES               := -lmlx -lm -L. -L$(LIBFT_DIRECTORY) -lft -L$(PRINTF_DIRECTORY) -lftprintf \
-							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS) -L$(MLX_DIRECTORY)
+							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS)
 INCLUDES                := -I$(LIBFT_HEADER) -I$(PRINTF_HEADER) -I$(GNL_HEADER) \
 							-I$(INCLUDE_DIRECTORY) -I$(MLX_HEADER) $(LINUX_INCLUDES)
 BONUS_INCLUDES          :=
@@ -76,47 +76,27 @@ HEADER_FILES_BONUS		:= $(addprefix $(INCLUDE_DIRECTORY), $(HEADEHEADER_BONUSR))
 
 SRCS_LIST               := main.c\
 							arg_handler.c\
-							init.c\
-							init_map.c\
-							draw_dot.c\
 							draw_line.c\
-							draw_map.c\
 							draw_map_utils.c\
+							draw_map.c\
 							draw.c\
+							init_map.c\
+							init.c\
+							keybinds.c\
 							map_color.c\
-							map_parser.c\
 							map_parser_utils.c\
+							map_parser.c\
 							matrix.c\
+							projections.c\
 							rotation_matrices.c\
 							transformation_matrices.c\
-							utils.c\
-							debug.c
+							utils.c
 
 OBJECTS_LIST            := $(patsubst %.c, %.o, $(SRCS_LIST))
 OBJECTS                 := $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 SRCS_BONUS_LIST			:= main_bonus.c\
-							color_map_bonus.c\
-							controls_bonus.c\
-							draw_bonus.c\
-							draw_line_bonus.c\
-							draw_map_bonus.c\
-							init_bonus.c\
-							init_utils_bonus.c\
-							map_parser_bonus.c\
-							map_parser_utils_bonus.c\
-							matrix_utils_bonus.c\
-							projections_bonus.c\
-							projections_get_bonus.c\
-							projections_line_bonus.c\
-							rotation_bonus.c\
-							utils_2_bonus.c\
-							utils_3_bonus.c\
-							utils_bonus.c\
-							vectors_2_bonus.c\
-							vectors_bonus.c\
-							vectors_intersect_bonus.c\
-							vectors_solver_bonus.c
+							
 
 OBJECTS_LIST_BONUS		:= $(patsubst %.c, %.o, $(SRCS_BONUS_LIST))
 OBJECTS_BONUS			:= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST_BONUS))
