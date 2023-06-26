@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 14:27:35 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/25 01:37:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static void	assign_pointcolor(t_point *map_point, char *point_str)
 {
@@ -37,6 +38,7 @@ static void	load_points(char *line, t_map_data *map, int noline)
 		map->points[index].axis[Z_AXIS] = ft_atoi(&split_res[i][0]);
 		map->points[index].axis[X_AXIS] = i - map->limits.axis[X_AXIS] / 2;
 		map->points[index].axis[Y_AXIS] = noline - map->limits.axis[Y_AXIS] / 2;
+		map->points[index].ispoint = 1;
 		assign_pointcolor(&map->points[index], split_res[i]);
 		if (map->limits.axis[Z_AXIS] < map->points[index].axis[Z_AXIS])
 			map->limits.axis[Z_AXIS] = map->points[index].axis[Z_AXIS];
@@ -44,6 +46,7 @@ static void	load_points(char *line, t_map_data *map, int noline)
 			map->z_min = map->points[index].axis[Z_AXIS];
 		i++;
 		index++;
+		// print_point(&map->points[index]);
 	}
 	free_split(split_res, index);
 }
@@ -59,8 +62,9 @@ static void	get_mappoints(t_map_data *map)
 	total_lines = 0;
 	prev_line = map->mapread;
 	line = NULL;
+	printf("Map Dimension: %d", map->dimension);
 	map->points = ft_calloc(map->dimension, sizeof(t_point));
-	while (i++)
+	while (++i)
 	{
 		if (map->mapread[i] == '\n' || map->mapread[i] == '\0')
 		{
@@ -71,8 +75,8 @@ static void	get_mappoints(t_map_data *map)
 			if (map->mapread[i] == '\0')
 				break ;
 		}
-		i++;
 	}
+	// print_map(map);
 	ft_printf("Successfully loaded %d points.\n", map->dimension);
 	free(line);
 }
@@ -81,6 +85,7 @@ static char	*read_map(int fd)
 {
 	char	*gnl_res;
 	char	*mapstrings;
+	char	*temp;
 
 	mapstrings = ft_strdup("");
 	ft_printf("Loading Map...\n");
@@ -92,7 +97,9 @@ static char	*read_map(int fd)
 			free(gnl_res);
 			break ;
 		}
+		temp = mapstrings;
 		mapstrings = ft_strjoin(mapstrings, gnl_res);
+		free(temp);
 		free(gnl_res);
 	}
 	return (mapstrings);

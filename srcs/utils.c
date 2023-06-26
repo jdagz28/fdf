@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:21:14 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 13:39:38 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/24 23:09:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	destroy_fdf(t_fdf *fdf)
 	if (!fdf)
 		exit(0);
 	free_map(&fdf->map);
-	free(&fdf->map);
+	// free(fdf->mlx_data);
 	if (fdf->display_title)
 		free(fdf->display_title);
 	ft_printf("\n\nExiting FDF...\n");

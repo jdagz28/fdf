@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 10:54:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/24 23:51:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	gradient(int startcolor, int endcolor, int len, int pix)
 
 static void	load_color(int max, int min, t_point *point, t_color	color)
 {
+	point->ispoint = 1;
 	point->color = DEFAULT_COLOR;
 	if (point->hex_color > 0)
 	{

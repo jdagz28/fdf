@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 17:09:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/25 00:53:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,12 @@ void	connect_points(t_point *point, t_fdf *fdf, int density, int line)
 		if (x_end >= (int)fdf->map.limits.axis[X_AXIS])
 			x_end = (int)fdf->map.limits.axis[X_AXIS] - 1;
 		y_end = i + (int)fdf->map.limits.axis[X_AXIS] * density;
-		if (pixel_in_window(point[i]) && pixel_in_window(point[x_end]))
+		if (point[i].ispoint && pixel_in_window(point[i]) && pixel_in_window(point[x_end]))
+		{
 			draw_line_dda(fdf, point[i], point[x_end]);
-		if (line + density < (int)fdf->map.limits.axis[Y_AXIS])
-			draw_line_dda(fdf, point[i], point[y_end]);
+			if (line + density < (int)fdf->map.limits.axis[Y_AXIS])
+				draw_line_dda(fdf, point[i], point[y_end]);
+		}
 		i += density;
 	}
 }
@@ -86,11 +88,13 @@ void	draw_wireframe(t_fdf *fdf, t_point *point)
 		density = 1;
 	i = 0;
 	printf("Drawing Wireframe\n");
-	printf("Dimensio: %d\n", fdf->map.dimension);
+	printf("Dimension: %d\n", fdf->map.dimension);
+	printf("X Axis limits: %f\n", fdf->map.limits.axis[X_AXIS]);
+	printf("Y Axis limits: %f\n", fdf->map.limits.axis[Y_AXIS]);
 	while (i < fdf->map.dimension)
 	{
-		connect_points(&point[i], fdf, density, i \
-							/ fdf->map.limits.axis[X_AXIS]);
+		connect_points(&point[i], fdf, \
+						density, i / fdf->map.limits.axis[X_AXIS]);
 		printf("%d\n", i);
 		i = i + fdf->map.limits.axis[X_AXIS] * density;
 	}

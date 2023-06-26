@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 16:07:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/25 01:28:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ int	draw_map(t_fdf *fdf)
 	fdf->map.renders = fdf->map.renders + 1;
 	draw_background(fdf, fdf->map.color.background);
 	printf("Background drawn\n");
+	print_map(&fdf->map);
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
 	printf("Map duplicated\n");
 	apply_3d_to_points(fdf, projection);
 	printf("Elemental Rotation applied to points\n");
 	draw_type(fdf, projection);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
+	//mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
 	free(projection);
 	return (1);
 }

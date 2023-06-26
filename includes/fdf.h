@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 13:45:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/25 01:19:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_point
 	float	axis[3];
 	int		color;
 	int		hex_color;
+	int		ispoint;
 }			t_point;
 
 typedef struct s_color
@@ -112,6 +113,9 @@ typedef struct s_fdf
 //ARG_HANDLER.C
 int	arg_handler(int argc, char **argv);
 
+//DRAW_DOT.C
+void	draw_dotpoint(t_fdf *fdf, t_point *projection);
+
 //DRAW_LINE.C
 int	pixel_in_window(t_point pixel);
 void	draw_line_dda(t_fdf *fdf, t_point start, t_point end);
@@ -173,5 +177,7 @@ void	translate(t_point *points, t_point move, int len);
 
 //DEBUG.C
 void	print_map(t_map_data *map);
+void	print_point(t_point *point);
+
 
 #endif

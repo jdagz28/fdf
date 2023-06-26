@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 09:59:50 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/22 10:54:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/25 01:20:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ void	print_map(t_map_data *map)
 		printf("Point hex_color: %d\n\n\n", map->points[i].hex_color);
 		i++;
 	}
+}
+
+void	print_point(t_point *point)
+{
+	printf("X: %f\n", point->axis[X_AXIS]);
+	printf("Y: %f\n", point->axis[Y_AXIS]);
+	printf("Z: %f\n", point->axis[Z_AXIS]);
+	printf("Color: %d\n", point->color);
+	printf("HEX: %d\n\n", point->hex_color);
 }
