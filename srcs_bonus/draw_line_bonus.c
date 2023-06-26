@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw_line_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:03:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 16:17:23 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	pixel_in_window(t_point pixel)
 {
@@ -31,7 +31,7 @@ static float	do_sqrt(t_point start, t_point end)
 	return (res);
 }
 
-static void	draw_line_dda(t_fdf *fdf, t_point start, t_point end)
+void	draw_line_dda(t_fdf *fdf, t_point start, t_point end)
 {
 	int		steps;
 	t_point	pixel;

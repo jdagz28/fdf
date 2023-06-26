@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:46:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 16:19:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int			arg_handler(int argc, char **argv);
 
 //DRAW_LINE.C
 int			pixel_in_window(t_point pixel);
+void		draw_line_dda(t_fdf *fdf, t_point start, t_point end);
 void		draw_wireframe(t_fdf *fdf, t_point *point);
 
 //DRAW_MAP_UTILS.C
@@ -123,6 +124,9 @@ int			draw_map(t_fdf *fdf);
 
 //DRAW.C
 void		my_mlx_pixel_put(t_fdf *fdf, t_point pixel);
+
+//DRAW_MENU
+void		draw_menu(t_fdf *fdf);
 
 //INIT_MAP.C
 void		init_map(t_map_data *map);

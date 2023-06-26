@@ -6,11 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:52:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 15:55:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 static void	assign_pointcolor(t_point *map_point, char *point_str)
 {

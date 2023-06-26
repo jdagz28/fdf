@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/26 13:52:21 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/26 16:33:35 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ BONUS_INCLUDES          :=
 HEADER                  := fdf.h
 HEADER_BONUS			:= fdf_bonus.h
 HEADER_FILES            := $(addprefix $(INCLUDE_DIRECTORY), $(HEADER))
-HEADER_FILES_BONUS		:= $(addprefix $(INCLUDE_DIRECTORY), $(HEADEHEADER_BONUSR))
+HEADER_FILES_BONUS		:= $(addprefix $(INCLUDE_DIRECTORY), $(HEADEHEADER_BONUS))
 
 SRCS_LIST               := main.c\
 							arg_handler.c\
@@ -96,6 +96,23 @@ OBJECTS_LIST            := $(patsubst %.c, %.o, $(SRCS_LIST))
 OBJECTS                 := $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 SRCS_BONUS_LIST			:= main_bonus.c\
+							arg_handler_bonus.c\
+							draw_bonus.c\
+							draw_line_bonus.c\
+							draw_map_bonus.c\
+							draw_map_utils_bonus.c\
+							draw_menu_bonus.c\
+							init_bonus.c\
+							init_map_bonus.c\
+							keybinds_bonus.c\
+							map_color_bonus.c\
+							map_parser_bonus.c\
+							map_parser_utils_bonus.c\
+							matrix_bonus.c\
+							projections_bonus.c\
+							rotation_matrices_bonus.c\
+							transformation_matrices_bonus.c\
+							utils_bonus.c
 							
 
 OBJECTS_LIST_BONUS		:= $(patsubst %.c, %.o, $(SRCS_BONUS_LIST))

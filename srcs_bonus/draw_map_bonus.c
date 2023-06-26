@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:41:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/26 17:16:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 static void	apply_3d_to_points(t_fdf *fdf, t_point *points)
 {
@@ -88,6 +88,7 @@ int	draw_map(t_fdf *fdf)
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
 	apply_3d_to_points(fdf, projection);
 	draw_type(fdf, projection);
+	draw_menu(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
 	free(projection);
 	return (1);
