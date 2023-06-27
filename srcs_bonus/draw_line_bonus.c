@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 16:17:23 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 13:50:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_line_dda(t_fdf *fdf, t_point start, t_point end)
 	pixel.axis[Y_AXIS] = start.axis[Y_AXIS];
 	pixels = do_sqrt(start, end);
 	len = pixels;
-	while (steps--)
+	while (steps-- && pixel_in_window(pixel))
 	{
 		pixel.color = gradient(start.color, end.color, len, len - steps);
 		my_mlx_pixel_put(fdf, pixel);
@@ -72,8 +72,7 @@ static void	connect_points(t_point *point, t_fdf *fdf, int density, int line)
 		if (x_end >= (int)fdf->map.limits.axis[X_AXIS])
 			x_end = (int)fdf->map.limits.axis[X_AXIS] - 1;
 		y_end = i + (int)fdf->map.limits.axis[X_AXIS] * density;
-		if (point[i].ispoint && pixel_in_window(point[i]) \
-							&& pixel_in_window(point[x_end]))
+		if (point[i].ispoint)
 		{
 			draw_line_dda(fdf, point[i], point[x_end]);
 			if (line + density < (int)fdf->map.limits.axis[Y_AXIS])

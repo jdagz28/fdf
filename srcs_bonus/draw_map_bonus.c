@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 05:43:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:17:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	apply_3d_to_points(t_fdf *fdf, t_point *points)
 
 static void	fit_window(t_fdf *fdf, t_point *projection)
 {
-	fdf->map.source.axis[X_AXIS] = WINDOW_WIDTH / 2;
+	fdf->map.source.axis[X_AXIS] = ((WINDOW_WIDTH - MENU_WIDTH - 100) / 2);
 	fdf->map.source.axis[Y_AXIS] = WINDOW_HEIGHT / 2;
 	fdf->map.source.axis[Z_AXIS] = 0;
 	fdf->map.scale = 1;

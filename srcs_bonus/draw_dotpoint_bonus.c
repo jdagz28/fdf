@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 05:11:14 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 05:42:25 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 11:16:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	draw_eachpoint(t_fdf *fdf, t_point pixel, t_point point, \
 							int coord)
 {
 	int	i;
-	
+
 	i = point.axis[X_AXIS];
 	while (i <= point.axis[X_AXIS] + coord)
 	{
@@ -37,18 +37,19 @@ void	draw_point(t_fdf *fdf, t_point point, int radius)
 	int		error;
 	t_point	pixel;
 
+	error = 0;
 	axis[X_AXIS] = radius;
 	axis[Y_AXIS] = 0;
 	change[X_AXIS] = 1 - (radius << 1);
 	change[Y_AXIS] = 0;
 	pixel.color = point.color;
-	while (axis[X] >= axis[Y])
+	while (axis[X_AXIS] >= axis[Y_AXIS])
 	{
 		draw_eachpoint(fdf, pixel, point, axis[Y_AXIS]);
 		draw_eachpoint(fdf, pixel, point, axis[X_AXIS]);
-		axis[Y]++;
+		axis[Y_AXIS]++;
 		error += change[Y_AXIS];
-		change[Y] += 2;
+		change[Y_AXIS] += 2;
 		if (((error << 1) + change[X_AXIS]) > 0)
 		{
 			axis[X_AXIS]--;

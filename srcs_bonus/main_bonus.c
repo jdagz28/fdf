@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:55:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:59:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		destroy_fdf(&fdf);
 	project_isometric(&fdf.map);
 	draw_map(&fdf);
-	mlx_hook(fdf.win, ON_KEYDOWN, 1L << 0, exit_fdf, &fdf);
+	mlx_hook(fdf.win, ON_KEYDOWN, 1L << 0, keybindings, &fdf);
 	mlx_hook(fdf.win, ON_DESTROY, 1L << 0, clean_exit, &fdf);
 	mlx_loop(fdf.mlx);
 	free(fdf.map.points);

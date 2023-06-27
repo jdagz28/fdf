@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/26 16:33:35 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/27 10:54:24 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ OBJECTS                 := $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 SRCS_BONUS_LIST			:= main_bonus.c\
 							arg_handler_bonus.c\
 							draw_bonus.c\
+							draw_dotpoint_bonus.c\
 							draw_line_bonus.c\
 							draw_map_bonus.c\
 							draw_map_utils_bonus.c\
