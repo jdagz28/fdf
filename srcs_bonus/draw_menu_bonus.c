@@ -6,20 +6,66 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:06:28 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 15:13:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 17:32:38 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+#include <stdio.h>
 
-void	print_str(t_fdf *fdf, int x, int y, char *str)
+static void	number_put(t_fdf *fdf, int x, int y, float num)
 {
+	char	*str;
+
+	str = ft_itoa(num);
+	mlx_string_put(fdf->mlx, fdf->win, x, y, 0xFFFFFF, str);
+}
+
+static void	dimensions_put(t_fdf *fdf, int x, int y)
+{
+	char	*height;
+	char	*width;
+	char	*str;
+
+
+	width = ft_itoa(fdf->map.map_width);
+	height = ft_itoa(fdf->map.map_height);
+	str = malloc(ft_strlen(width) + ft_strlen(height) + 4);
+	if (!str)
+		exit_error("Malloc Failed");
+	ft_strlcpy(str, width, ft_strlen(width) + 1);
+	ft_strlcat(str, " X ", ft_strlen(str) + 4);
+	ft_strlcat(str, height, ft_strlen(str) + ft_strlen(height) + 1);
 	mlx_string_put(fdf->mlx, fdf->win, x, y, 0xFFFFFF, str);
 }
 
 static void	draw_mapinfo(t_fdf *fdf)
 {
-	print_str(fdf, 1600, 20, "MAP INFO");
+	int	y;
+
+	y = 0;
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 80, 0xFFFFFF, "MAP INFO");
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Filename: ");
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Dimensions: ");
+	dimensions_put(fdf, 1750, y);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Points: ");
+	number_put(fdf, 1750, y, fdf->map.dimension);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Z Max: ");
+	number_put(fdf, 1750, y, fdf->map.limits.axis[Z_AXIS]);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Z Min: ");
+	number_put(fdf, 1750, y, fdf->map.z_min);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 50, 0xFFFFFF, "RENDER INFO");
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Renders: ");
+	number_put(fdf, 1750, y, fdf->map.renders);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Scale: ");
+	number_put(fdf, 1750, y, fdf->map.scale);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Depth: ");
+	number_put(fdf, 1750, y, fdf->map.z_divisor);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 50, 0xFFFFFF, "VIEW ANGLES");
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "X: ");
+	number_put(fdf, 1750, y, fdf->map.ang[X_AXIS]);
+	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, "Y: ");
+	number_put(fdf, 1750, y, fdf->map.ang[Y_AXIS]);
 }
 
 static void	draw_rectangle(t_fdf *fdf, t_point *boundaries)
@@ -48,7 +94,7 @@ static void	draw_rectangle(t_fdf *fdf, t_point *boundaries)
 }
 
 
-static void	render_menu_box(t_fdf *fdf)
+void	render_menu_box(t_fdf *fdf)
 {
 	t_point	boundaries[4];
 	int		menu_x;
@@ -72,8 +118,7 @@ static void	render_menu_box(t_fdf *fdf)
 }
 
 
-void	draw_menu(t_fdf *fdf)
+void	print_menu(t_fdf *fdf)
 {
 	draw_mapinfo(fdf);
-	render_menu_box(fdf);
 }

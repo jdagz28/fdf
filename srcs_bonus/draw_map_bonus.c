@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 12:17:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:15:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ int	draw_map(t_fdf *fdf)
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);
 	apply_3d_to_points(fdf, projection);
 	draw_type(fdf, projection);
-	draw_menu(fdf);
+	render_menu_box(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->mlx_data->img, 0, 0);
+	print_menu(fdf);
 	free(projection);
 	return (1);
 }

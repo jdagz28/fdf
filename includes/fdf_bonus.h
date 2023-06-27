@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 15:56:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:18:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define Y_AXIS 1
 # define Z_AXIS 2
 # define DEFAULT_COLOR 0x151515
-# define MENU_WIDTH 500
+# define MENU_WIDTH 300
 # define MENU_HEIGHT 980
 
 # include <stdlib.h>
@@ -201,7 +201,8 @@ int			draw_map(t_fdf *fdf);
 void		my_mlx_pixel_put(t_fdf *fdf, t_point pixel);
 
 //DRAW_MENU
-void		draw_menu(t_fdf *fdf);
+void		render_menu_box(t_fdf *fdf);
+void		print_menu(t_fdf *fdf);
 
 //INIT_MAP.C
 void		init_map(t_map_data *map);
