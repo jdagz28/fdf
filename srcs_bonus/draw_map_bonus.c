@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 17:16:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/27 05:43:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ static void	draw_type(t_fdf *fdf, t_point *projection)
 	if (fdf->map.drawtype == line)
 	{	
 		draw_wireframe(fdf, projection);
+	}
+	else if (fdf->map.drawtype == dot)
+	{
+		draw_dotpoint(fdf, projection);
 	}
 }
 
