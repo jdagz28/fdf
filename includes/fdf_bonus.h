@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 16:18:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:42:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,21 @@ typedef struct s_data_mlx
 	int		endian;
 }				t_data_mlx;
 
+typedef enum s_projection
+{
+	isometric = 0,
+	perspective = 1,
+	top_view = 2
+}	t_projection;
+
+typedef enum s_colorinfo
+{
+	RGB = 0,
+	White = 1,
+	tt_pallette1 = 2,
+	tt_pallette2 = 3
+}	t_colorinfo;
+
 typedef struct s_fdf
 {
 	t_data_mlx		*mlx_data;
@@ -172,8 +187,8 @@ typedef struct s_fdf
 	char			*display_title;
 	t_map_data		map;
 	int				fit;
-	float			cursor_x;
-	float			cursor_y;
+	t_projection	projection;
+	t_colorinfo		color;
 }	t_fdf;
 
 //ARG_HANDLER.C
@@ -204,6 +219,15 @@ void		my_mlx_pixel_put(t_fdf *fdf, t_point pixel);
 void		render_menu_box(t_fdf *fdf);
 void		print_menu(t_fdf *fdf);
 
+//DRAW_MENU_2_BONUS.C
+void		filename_put(t_fdf *fdf, int x, int y);
+void		draw_projectioninfo(t_fdf *fdf);
+void		draw_colorinfo(t_fdf *fdf);
+void		draw_controlsinfo(t_fdf *fdf);
+
+//DRAW_MENUBOX_BONUS.C
+void		render_menu_box(t_fdf *fdf);
+
 //INIT_MAP.C
 void		init_map(t_map_data *map);
 
@@ -215,9 +239,13 @@ int			init_fdf(t_fdf *fdf, char *filename);
 int			clean_exit(t_fdf *fdf);
 int			keybindings(int keycode, t_fdf *fdf);
 
+//KEYBINDS_2.C
+void		keybindings_cont_three(int keycode, t_fdf *fdf);
+
 //MAP_COLOR.C
 int			gradient(int startcolor, int endcolor, int len, int pix);
 void		color_points(t_map_data *map);
+void		load_color(int max, int min, t_point *point, t_color	color);
 
 //MAP_PARSER_UTILS.C
 void		check_z(t_map_data *map, int index);
@@ -234,7 +262,7 @@ t_point		matrix_multiplier(float matrix[3][3], t_point point);
 
 //PROJECTION.C
 void		project_isometric(t_map_data *map);
-void		project_parallel(t_map_data *map);
+void		project_perspective(t_map_data *map);
 void		project_ortho(t_point *points, t_point *projection, int len);
 
 //ROTATION_MATRICES.C

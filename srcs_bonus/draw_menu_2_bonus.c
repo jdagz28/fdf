@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 22:36:55 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 01:37:47 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:40:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	draw_projectioninfo(t_fdf *fdf)
 	if (fdf->projection == isometric)
 		mlx_string_put(fdf->mlx, fdf->win, 1595, y, 0xFFFFFF, "X");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
-														"[ ] - Parallel");
-	if (fdf->projection == parallel)
+														"[ ] - Perspective");
+	if (fdf->projection == perspective)
 		mlx_string_put(fdf->mlx, fdf->win, 1595, y, 0xFFFFFF, "X");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
 														"[ ] - Top View");
@@ -76,7 +76,7 @@ void	draw_controlsinfo(t_fdf *fdf)
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
 												"ARROWS: Rotation");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
-											"Numpad 7,9: Rotation (Z-axis)");
+											"Numpad 1,3: Rotation (Z-axis)");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
 											"Numpad 8,2,4,6: Translation");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
@@ -88,6 +88,5 @@ void	draw_controlsinfo(t_fdf *fdf)
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
 										"Numpad 5: Change Draw Type");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
-										"Numpad 0: Reset Angles and Projection");
-									
+									"Numpad 0: Reset Angles and Projection");
 }

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 01:33:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 09:46:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	keybindings_cont_two(int keycode, t_fdf *fdf)
 		fdf->projection = (fdf->projection + 1) % 3;
 		if (fdf->projection == isometric)
 			project_isometric(&fdf->map);
-		else if (fdf->projection == parallel)
-			project_parallel(&fdf->map);
+		else if (fdf->projection == perspective)
+			project_perspective(&fdf->map);
 		else if (fdf->projection == top_view)
 		{
 			fdf->map.ang[X_AXIS] = 0;
@@ -69,10 +69,14 @@ void	keybindings_cont(int keycode, t_fdf *fdf)
 		fdf->map.source.axis[X_AXIS] = fdf->map.source.axis[X_AXIS] + 5;
 	else if (keycode == K_NUM_4)
 		fdf->map.source.axis[X_AXIS] = fdf->map.source.axis[X_AXIS] - 5;
+	else if (keycode == K_NUM_1)
+		angle(&fdf->map.ang[Z_AXIS], -2.5);
+	else if (keycode == K_NUM_3)
+		angle(&fdf->map.ang[Z_AXIS], 2.5);
 	else if (keycode == K_NUM_7)
-		angle(&fdf->map.ang[Z_AXIS], 2.5);
+		fdf->map.z_divisor = fdf->map.z_divisor + (fdf->map.z_divisor * 0.10);
 	else if (keycode == K_NUM_9)
-		angle(&fdf->map.ang[Z_AXIS], 2.5);
+		fdf->map.z_divisor = fdf->map.z_divisor - (fdf->map.z_divisor * 0.10);
 }
 
 int	keybindings(int keycode, t_fdf *fdf)
