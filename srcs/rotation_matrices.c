@@ -6,13 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 13:44:38 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/23 14:42:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 10:03:53 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* Elemenetal Rotation or Basic Rotation - wiki*/
 void	rotate_x(t_point *points, t_point *projection, float ang, int len)
 {
 	int		i;
