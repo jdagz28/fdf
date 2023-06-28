@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:46:21 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 22:50:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 10:02:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	draw_rectangle(t_fdf *fdf, t_point *boundaries)
 		i += 0.5;
 	}
 }
-
 
 void	render_menu_box(t_fdf *fdf)
 {

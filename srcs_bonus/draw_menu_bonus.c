@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:06:28 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 01:40:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 10:00:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	dimensions_put(t_fdf *fdf, int x, int y)
 	char	*height;
 	char	*width;
 	char	*str;
-
 
 	width = ft_itoa(fdf->map.map_width);
 	height = ft_itoa(fdf->map.map_height);
