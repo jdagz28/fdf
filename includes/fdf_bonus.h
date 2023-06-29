@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 09:42:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:24:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,6 @@ enum {
 	K_DOWN = 65364,
 	K_LEFT = 65361,
 	K_RIGHT = 65363,
-	K_W = 119,
-	K_S = 115,
-	K_A = 97,
-	K_D = 100,
-	K_P = 112,
-	K_MINUS = 61,
-	K_PLUS = 10,
-	K_R = 114,
-	K_U = 117,
-	K_J = 106,
-	K_I = 105,
-	K_K = 107,
-	K_O = 111,
-	K_L = 108,
 	K_NUM_0 = 65438,
 	K_NUM_1 = 65436,
 	K_NUM_2 = 65433,
@@ -79,20 +65,6 @@ enum {
 	K_DOWN = 125,
 	K_LEFT = 123,
 	K_RIGHT = 124,
-	K_W = 13,
-	K_S = 1,
-	K_A = 0,
-	K_D = 2,
-	K_P = 35,
-	K_MINUS = 27,
-	K_PLUS = 24,
-	K_R = 15,
-	K_U = 32,
-	K_J = 38,
-	K_I = 34,
-	K_K = 40,
-	K_O = 31,
-	K_L = 37,
 	K_NUM_MINUS = 78,
 	K_NUM_PLUS = 69,
 	K_NUM_0 = 82,
@@ -250,7 +222,7 @@ void		load_color(int max, int min, t_point *point, t_color	color);
 //MAP_PARSER_UTILS.C
 void		check_z(t_map_data *map, int index);
 int			valid_point(char *value);
-int			check_hexcolor(char *line);
+int			check_hexcolor(char *line, int *error);
 void		get_mapsize(t_map_data *map);
 
 //MAP_PARSER.C

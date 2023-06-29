@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:47:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/29 12:40:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void		color_points(t_map_data *map);
 //MAP_PARSER_UTILS.C
 void		check_z(t_map_data *map, int index);
 int			valid_point(char *value);
-int			check_hexcolor(char *line);
+int			check_hexcolor(char *line, int *error);
 void		get_mapsize(t_map_data *map);
 
 //MAP_PARSER.C

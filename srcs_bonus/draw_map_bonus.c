@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:45:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/27 16:15:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/29 12:36:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	draw_map(t_fdf *fdf)
 
 	projection = malloc(sizeof(t_point) * fdf->map.dimension);
 	if (!projection)
-		exit(1);
+		exit_error("Malloc Failed");
 	fdf->map.renders = fdf->map.renders + 1;
 	draw_background(fdf, fdf->map.color.background);
 	duplicate_map(fdf->map.points, projection, fdf->map.dimension);

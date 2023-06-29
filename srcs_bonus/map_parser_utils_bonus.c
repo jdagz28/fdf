@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:13:02 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:55:46 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:39:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	valid_point(char *value)
 		return (1);
 }
 
-int	check_hexcolor(char *line)
+int	check_hexcolor(char *line, int *error)
 {
 	char	**color;
 	int		get_color;
@@ -47,6 +47,11 @@ int	check_hexcolor(char *line)
 	if (ft_strchr(line, ',') != 0)
 	{
 		color = ft_split(line, ',');
+		if (!color)
+		{
+			*error = 1;
+			return (0);
+		}
 		get_color = strtol(color[1] + 2, NULL, 16);
 		free_split(color);
 		return (get_color);
@@ -58,11 +63,7 @@ int	check_hexcolor(char *line)
 static void	get_mapsize_cont(t_map_data *map, int elem_count)
 {
 	if (elem_count > 0 && (map->limits.axis[X_AXIS] != elem_count))
-	{
-		ft_printf("Row size is different from the previous! (row %d)\n", \
-					map->limits.axis[X_AXIS]);
 		exit_error("Map row elements are different.\n");
-	}
 	map->limits.axis[Y_AXIS] = map->limits.axis[Y_AXIS] + 1;
 	map->map_height = map->limits.axis[Y_AXIS];
 	map->map_width = map->limits.axis[X_AXIS];

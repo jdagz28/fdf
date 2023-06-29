@@ -6,17 +6,23 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:55:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:31:58 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-static void	assign_pointcolor(t_point *map_point, char *point_str)
+static int	assign_pointcolor(t_point *map_point, char *point_str)
 {
+	int	error;
+
+	error = 0;
 	map_point->color = DEFAULT_COLOR;
-	if (check_hexcolor(point_str) != 0)
-		map_point->hex_color = check_hexcolor(point_str);
+	if (check_hexcolor(point_str, &error) != 0)
+		map_point->hex_color = check_hexcolor(point_str, &error);
+	if (error != 0)
+		return (0);
+	return (1);
 }
 
 static int	load_points(char *line, t_map_data *map, int noline)
@@ -37,7 +43,8 @@ static int	load_points(char *line, t_map_data *map, int noline)
 		map->points[index].axis[X_AXIS] = i - map->limits.axis[X_AXIS] / 2;
 		map->points[index].axis[Y_AXIS] = noline - map->limits.axis[Y_AXIS] / 2;
 		map->points[index].ispoint = 1;
-		assign_pointcolor(&map->points[index], split_res[i]);
+		if (!assign_pointcolor(&map->points[index], split_res[i]))
+			error_split_loadpoint(map);
 		check_z(map, index);
 		i++;
 		index++;
@@ -108,7 +115,7 @@ void	map_parser(t_map_data *map, char *filename)
 	init_map(map);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		exit_error("File not found\n");
+		exit_error("File error\n");
 	map->mapread = read_map(fd);
 	close(fd);
 	get_mapsize(map);

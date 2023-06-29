@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 09:46:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 23:05:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ int	keybindings(int keycode, t_fdf *fdf)
 	else if (keycode == K_NUM_5)
 		fdf->map.drawtype = (fdf->map.drawtype + 1) % 2;
 	else if (keycode == K_NUM_PLUS)
-		fdf->map.scale = fdf->map.scale + 1.5;
+		fdf->map.scale = fdf->map.scale * 1.1;
 	else if (keycode == K_NUM_MINUS)
 	{	
 		if (fdf->map.scale > 2)
-			fdf->map.scale = fdf->map.scale - 1.5;
+			fdf->map.scale = fdf->map.scale / 1.1;
 	}
 	else if (keycode == K_UP)
 		angle(&fdf->map.ang[X_AXIS], 2.5);

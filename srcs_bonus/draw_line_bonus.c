@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 11:47:48 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:49:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_line_dda(t_fdf *fdf, t_point start, t_point end)
 	pixel.axis[Y_AXIS] = start.axis[Y_AXIS];
 	pixels = do_sqrt(start, end);
 	len = pixels;
-	while (steps-- && pixel_in_window(pixel))
+	while (steps--)
 	{
 		pixel.color = gradient(start.color, end.color, len, len - steps);
 		my_mlx_pixel_put(fdf, pixel);

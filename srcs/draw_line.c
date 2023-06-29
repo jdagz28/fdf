@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 22:09:04 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 15:03:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:49:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ static void	connect_points(t_point *point, t_fdf *fdf, int density, int line)
 		if (x_end >= (int)fdf->map.limits.axis[X_AXIS])
 			x_end = (int)fdf->map.limits.axis[X_AXIS] - 1;
 		y_end = i + (int)fdf->map.limits.axis[X_AXIS] * density;
-		if (point[i].ispoint && pixel_in_window(point[i]) \
-							&& pixel_in_window(point[x_end]))
+		if (point[i].ispoint)
 		{
 			draw_line_dda(fdf, point[i], point[x_end]);
 			if (line + density < (int)fdf->map.limits.axis[Y_AXIS])

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:22:46 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/26 13:30:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/28 22:57:10 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	limits(t_point *points, int len)
 	{
 		if (points[i].axis[X_AXIS] > (WINDOW_WIDTH - 150))
 			return (1);
-		if (points[i].axis[Y_AXIS] > WINDOW_HEIGHT - 200)
+		if (points[i].axis[Y_AXIS] > WINDOW_HEIGHT - 150)
 			return (1);
 		i++;
 	}
