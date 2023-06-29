@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/31 14:44:56 by jdagoy            #+#    #+#              #
-#    Updated: 2023/06/28 22:20:41 by jdagoy           ###   ########.fr        #
+#    Updated: 2023/06/29 17:04:33 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OS_NAME					:= $(shell uname -s)
 ifeq ($(OS_NAME), Linux)
 	FSANITIZE			:= -fsanitize=address -fsanitize=leak
 	FRAMEWORK			:=
-	LINUX_LIBS			:= -lXext -lX11 
+	LINUX_LIBS			:= -lXext -lX11 -L$(MLX_DIRECTORY)
 	LINUX_INCLUDES		:= -I/usr/include
 	OS_FLAG				:= -D LINUX
 else
@@ -64,7 +64,7 @@ INCLUDE_DIRECTORY       := ./includes/
 
 
 LIBRARIES               := -lmlx -lm -L. -L$(LIBFT_DIRECTORY) -lft -L$(PRINTF_DIRECTORY) -lftprintf \
-							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS) -L$(MLX_DIRECTORY)
+							 -L$(GNL_DIRECTORY) -lgnl $(FRAMEWORK) $(LINUX_LIBS)
 INCLUDES                := -I$(LIBFT_HEADER) -I$(PRINTF_HEADER) -I$(GNL_HEADER) \
 							-I$(INCLUDE_DIRECTORY) -I$(MLX_HEADER) $(LINUX_INCLUDES)
 BONUS_INCLUDES          :=
@@ -89,7 +89,7 @@ SRCS_LIST               := main.c\
 							matrix.c\
 							projections.c\
 							rotation_matrices.c\
-							transformation_matrices.c\
+							transformation_vectors.c\
 							utils.c
 
 OBJECTS_LIST            := $(patsubst %.c, %.o, $(SRCS_LIST))
@@ -115,7 +115,7 @@ SRCS_BONUS_LIST			:= main_bonus.c\
 							matrix_bonus.c\
 							projections_bonus.c\
 							rotation_matrices_bonus.c\
-							transformation_matrices_bonus.c\
+							transformation_vectors_bonus.c\
 							utils_bonus.c
 							
 

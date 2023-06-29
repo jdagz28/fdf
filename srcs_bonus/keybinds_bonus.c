@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:20:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 23:05:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:09:11 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	keybindings_cont_two(int keycode, t_fdf *fdf)
 		fdf->projection = (fdf->projection + 1) % 3;
 		if (fdf->projection == isometric)
 			project_isometric(&fdf->map);
-		else if (fdf->projection == perspective)
-			project_perspective(&fdf->map);
+		else if (fdf->projection == parallel)
+			project_parallel(&fdf->map);
 		else if (fdf->projection == top_view)
 		{
 			fdf->map.ang[X_AXIS] = 0;

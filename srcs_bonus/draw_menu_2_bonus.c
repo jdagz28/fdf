@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 22:36:55 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 09:59:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:09:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	draw_projectioninfo(t_fdf *fdf)
 	if (fdf->projection == isometric)
 		mlx_string_put(fdf->mlx, fdf->win, 1595, y, 0xFFFFFF, "X");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
-														"[ ] - Perspective");
-	if (fdf->projection == perspective)
+														"[ ] - Parallel");
+	if (fdf->projection == parallel)
 		mlx_string_put(fdf->mlx, fdf->win, 1595, y, 0xFFFFFF, "X");
 	mlx_string_put(fdf->mlx, fdf->win, 1590, y += 25, 0xFFFFFF, \
 														"[ ] - Top View");

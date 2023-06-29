@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:20:40 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/06/28 22:24:33 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:09:11 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct s_data_mlx
 typedef enum s_projection
 {
 	isometric = 0,
-	perspective = 1,
+	parallel = 1,
 	top_view = 2
 }	t_projection;
 
@@ -234,7 +234,7 @@ t_point		matrix_multiplier(float matrix[3][3], t_point point);
 
 //PROJECTION.C
 void		project_isometric(t_map_data *map);
-void		project_perspective(t_map_data *map);
+void		project_parallel(t_map_data *map);
 void		project_ortho(t_point *points, t_point *projection, int len);
 
 //ROTATION_MATRICES.C
